@@ -32,7 +32,14 @@ function repair(item) {
 }
 
 function get(item) {
-  return { ...item };
+  let enhLevel = item.enhancement;
+  let origName = item.name;
+  if(enhLevel === 0) {
+    return { ...item}
+  } else {
+    return Promise.resolve({ ...item,
+    ["name"]: `[+${enhLevel}] ${origName}`})
+  }
 }
 
 module.exports = {

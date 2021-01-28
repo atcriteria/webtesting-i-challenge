@@ -46,4 +46,21 @@ describe('failure tests', () => {
         expect(enhancedSword.durability).toBe(90);
         expect(enhancedSword.enhancement).toBe(17);
     })
-})
+});
+
+it('successfully updates name on enhancement', () => {
+    let newWeap = new Item.Item('sword');
+    newWeap.enhancement = 5;
+    // console.log(newWeap);
+    // let newerWeap = Item.get({ name: "sword", durability: 100, enhancement: 6});
+    Item.get(newWeap)
+        .then(res => {
+            expect(res.name).toBe("[+6] sword")
+        });
+    // Note to future self: When calling the function using a Class constructor 
+    // I had to string a .then and have the function return a Promise.resolve
+    // to handle the Promise, otherwise the test would fail before the new name
+    // would be updated. HOWEVER, I found that submitting an anonymous object
+    // inside of the method resolved correctly right away and did not require
+    // work with promises. Kinda weird but w/e. It works.
+});
